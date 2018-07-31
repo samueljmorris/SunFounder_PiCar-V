@@ -17,8 +17,8 @@ from picar import filedb
 
 class Camera(object):
 	'''Camera movement control class'''
-	pan_channel = 1			# Pan servo channel
-	tilt_channel = 2		# Tilt servo channel
+	pan_channel = 2			# Pan servo channel
+	tilt_channel = 1		# Tilt servo channel
 
 	READY_PAN = 90			# Ready position angle
 	READY_TILT = 90			# Ready position angle
@@ -29,7 +29,7 @@ class Camera(object):
 	PAN_STEP = 15				# Pan step = 5 degree
 	TILT_STEP = 10			# Tilt step = 5 degree
 
-	_DEBUG = False
+	_DEBUG = True
 	_DEBUG_INFO = 'DEBUG "camera.py":'
 
 	def __init__(self, debug=False, bus_number=1, db="config"):

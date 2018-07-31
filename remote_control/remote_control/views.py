@@ -25,7 +25,7 @@ cam.ready()
 bw.ready()
 fw.ready()
  
-SPEED = 60
+SPEED = 100
 bw_status = 0
 
 print stream.start()
@@ -72,13 +72,13 @@ def run(request):
 		elif action == 'camready':
 			cam.ready()
 		elif action == "camleft":
-			cam.turn_left(40)
+			cam.turn_left(60)
 		elif action == 'camright':
-			cam.turn_right(40)
+			cam.turn_right(60)
 		elif action == 'camup':
-			cam.turn_up(20)
+			cam.turn_up(50)
 		elif action == 'camdown':
-			cam.turn_down(20)	
+			cam.turn_down(30)	
 	if 'speed' in request.GET:
 		speed = int(request.GET['speed'])
 		if speed < 0:
