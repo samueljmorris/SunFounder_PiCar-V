@@ -98,10 +98,10 @@ class Camera(object):
 		self.tilt_servo.write(self.current_tilt)
 
 	def stop_tilting(self):
-		keep_tilting = False
+		self.keep_tilting = False
 	
 	def stop_panning(self):
-		keep_panning = False
+		self.keep_panning = False
 
 	def smooth_tilt(self, tilt_direction, delay=CAMERA_DELAY):
 		'''Control tilt servo to write the camera to ready position'''
@@ -109,7 +109,7 @@ class Camera(object):
 			tilt_diff = self.current_tilt - self.TILT_MAX
 		else:
 			tilt_diff = self.current_tilt - self.TILT_MIN
-		while keep_tilting: #check class attribute to continue or not
+		while self.keep_tilting: #check class attribute to continue or not
 			if tilt_diff != 0:
 				if tilt_direction == "up":
 					tilt_diff = self.current_tilt - self.TILT_MAX
@@ -138,7 +138,7 @@ class Camera(object):
 			pan_diff = self.current_pan - self.PAN_MAX
 		else:
 			pan_diff = self.current_pan - self.PAN_MIN
-		while keep_paning: #check class attribute to continue or not
+		while self.keep_panning: #check class attribute to continue or not
 			if pan_diff != 0:
 				if pan_direction == "right":
 					pan_diff = self.current_pan - self.PAN_MAX
