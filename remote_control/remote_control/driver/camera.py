@@ -25,11 +25,20 @@ class Camera(object):
 	CALI_PAN = 90			# Calibration position angle
 	CALI_TILT = 90			# Calibration position angle
 
-	CAMERA_DELAY = 0.005
+	CAMERA_DELAY = 0.05 # Pan/Tilt speed. Acceptable range: 0.01 - 0.05
 	PAN_STEP = 15				# Pan step = 5 degree
 	TILT_STEP = 10			# Tilt step = 5 degree
 
-	_DEBUG = True
+	TILT_MAX = 100 # Maximum safe tilt angle
+	TILT_MIN = 50 # Minimum safe tilt angle
+
+	PAN_MAX = 170 # Maximum safe pan angle
+	PAN_MIN = 10 # Minimum safe pan angle
+
+	keep_tilting = True # Class attribute to continue camera tilt loop
+	keep_panning = True # Class attribute to continue camera pan loop
+
+	_DEBUG = False
 	_DEBUG_INFO = 'DEBUG "camera.py":'
 
 	def __init__(self, debug=False, bus_number=1, db="config"):
@@ -88,34 +97,67 @@ class Camera(object):
 		self.current_tilt = self.safe_plus(self.current_tilt, -step)
 		self.tilt_servo.write(self.current_tilt)
 
-	def to_position(self, expect_pan, expect_tilt, delay=CAMERA_DELAY):
-		'''Control two servo to write the camera to ready position'''
-		pan_diff = self.current_pan - expect_pan
-		tilt_diff = self.current_tilt - expect_tilt
-		if self._DEBUG:
-			print self._DEBUG_INFO, 'Turn to posision [%s, %s] (pan, tilt)' % (expect_pan, expect_tilt)
-		while True:
-			if pan_diff != 0 or tilt_diff != 0:
-				pan_diff = self.current_pan - expect_pan
-				tilt_diff = self.current_tilt - expect_tilt
-				if abs(pan_diff) > 1:
-					if pan_diff < 0:
-						self.current_pan = self.safe_plus(self.current_pan, 1)
-					elif pan_diff > 0:
-						self.current_pan = self.safe_plus(self.current_pan, -1)
-				else:
-					self.current_pan = expect_pan
-				if abs(tilt_diff) > 1:
+	def stop_tilting(self):
+		keep_tilting = False
+	
+	def stop_panning(self):
+		keep_panning = False
+
+	def smooth_tilt(self, tilt_direction, delay=CAMERA_DELAY):
+		'''Control tilt servo to write the camera to ready position'''
+		if tilt_direction == "up":
+			tilt_diff = self.current_tilt - TILT_MAX
+		else:
+			tilt_diff = self.current_tilt - TILT_MIN
+		while keep_tilting: #check class attribute to continue or not
+			if tilt_diff != 0:
+				if tilt_direction == "up"
+					tilt_diff = self.current_tilt - TILT_MAX
 					if tilt_diff < 0:
 						self.current_tilt = self.safe_plus(self.current_tilt, 1)
-					elif tilt_diff > 0:
-						self.current_tilt = self.safe_plus(self.current_tilt, -1)
-				else:
-					self.current_tilt = expect_tilt
+					else:
+						self.current_tilt = TILT_MAX
 
-				self.pan_servo.write(self.current_pan)
-				self.tilt_servo.write(self.current_tilt)
-				time.sleep(delay)
+					self.tilt_servo.write(self.current_tilt)
+					time.sleep(delay)
+				else:
+					tilt_diff = self.current_tilt - TILT_MIN
+						if tilt_diff > 0:
+						self.current_tilt = self.safe_plus(self.current_tilt, -1)
+					else:
+						self.current_tilt = TILT_MIN
+
+					self.tilt_servo.write(self.current_tilt)
+					time.sleep(delay)
+			else:
+				break
+
+	def smooth_pan(self, pan_direction, delay=CAMERA_DELAY):
+		'''Control pan servo to write the camera to ready position'''
+		if pan_direction == "right":
+			pan_diff = self.current_pan - PAN_MAX
+		else:
+			pan_diff = self.current_pan - PAN_MIN
+		while keep_paning: #check class attribute to continue or not
+			if pan_diff != 0:
+				if pan_direction == "right"
+					pan_diff = self.current_pan - PAN_MAX
+					if pan_diff < 0:
+						self.current_pan = self.safe_plus(self.current_pan, 1)
+					else:
+						self.current_pan = PAN_MAX
+
+					self.pan_servo.write(self.current_pan)
+					time.sleep(delay)
+				else:
+					pan_diff = self.current_pan - PAN_MIN
+						if pan_diff > 0:
+						self.current_pan = self.safe_plus(self.current_pan, -1)
+					else:
+						self.current_pan = PAN_MIN
+
+					self.pan_servo.write(self.current_pan)
+					time.sleep(delay)
 			else:
 				break
 

@@ -71,18 +71,18 @@ def run(request):
 		# ================ Camera =================
 		elif action == 'camready':
 			cam.ready()
-		elif action == "camStartTurningLeft":
-			while action != "camStopTurningLeft":
-				cam.turn_left(1)
-		elif action == "camStartTurningRight":
-			while action != "camStopTurningRight":
-				cam.turn_right(1)
-		elif action == "camStartTurningUp":
-			while action != "camStopTurningUp":
-				cam.turn_up(1)
-		elif action == "camStartTurningDown":
-			while action != "camStopTurningDown":
-				cam.turn_down(1)
+		elif action == "camStartPanningLeft":
+			cam.smooth_pan(left)
+		elif action == "camStartPanningRight":
+			cam.smooth_pan(right)
+		elif action == "camStartTiltingUp":
+			cam.smooth_tilt(up)
+		elif action == "camStartTiltingDown":
+			cam.smooth_tilt(down)
+		elif action == "camStopPanning":
+			cam.stop_panning()
+		elif action == "camStopTilting":
+			cam.stop_tilting()
 	if 'speed' in request.GET:
 		speed = int(request.GET['speed'])
 		if speed < 0:

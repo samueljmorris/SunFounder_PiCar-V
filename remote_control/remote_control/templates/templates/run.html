@@ -134,16 +134,16 @@
             run_action('fwright')
             break;
           case '&':
-            run_action('camStartTurningUp')
+            run_action('camStartTiltingUp')
             break;
           case '(':
-            run_action('camStartTurningDown')
+            run_action('camStartTiltingDown')
             break;
           case "'":
-            run_action('camStartTurningRight')
+            run_action('camStartPanningRight')
             break;
           case '%':
-            run_action('camStartTurningLeft')
+            run_action('camStartPanningLeft')
             break;
           case '1':
             set_speed('40')
@@ -191,16 +191,16 @@
             run_action('fwstraight')
             break;
           case '&':
-            run_action('camStopTurningUp')
+            run_action('camStopTilting')
             break;
           case '(':
-            run_action('camStopTurningDown')
+            run_action('camStopTilting')
             break;
           case "'":
-            run_action('camStopTurningRight')
+            run_action('camStopPanning')
             break;
           case '%':
-            run_action('camStopTurningLeft')
+            run_action('camStopPanning')
             break;
         }
       }
