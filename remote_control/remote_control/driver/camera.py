@@ -122,7 +122,7 @@ class Camera(object):
 					time.sleep(delay)
 				else:
 					tilt_diff = self.current_tilt - TILT_MIN
-						if tilt_diff > 0:
+					if tilt_diff > 0:
 						self.current_tilt = self.safe_plus(self.current_tilt, -1)
 					else:
 						self.current_tilt = TILT_MIN
@@ -151,7 +151,7 @@ class Camera(object):
 					time.sleep(delay)
 				else:
 					pan_diff = self.current_pan - PAN_MIN
-						if pan_diff > 0:
+					if pan_diff > 0:
 						self.current_pan = self.safe_plus(self.current_pan, -1)
 					else:
 						self.current_pan = PAN_MIN
