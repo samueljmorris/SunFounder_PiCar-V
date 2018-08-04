@@ -72,13 +72,13 @@ def run(request):
 		elif action == 'camready':
 			cam.ready()
 		elif action == "camStartPanningLeft":
-			cam.smooth_pan(pan_direction=left)
+			cam.smooth_pan(pan_direction="left")
 		elif action == "camStartPanningRight":
-			cam.smooth_pan(pan_direction=right)
+			cam.smooth_pan(pan_direction="right")
 		elif action == "camStartTiltingUp":
-			cam.smooth_tilt(tilt_direction=up)
+			cam.smooth_tilt(tilt_direction="up")
 		elif action == "camStartTiltingDown":
-			cam.smooth_tilt(tilt_direction=down)
+			cam.smooth_tilt(tilt_direction="down")
 		elif action == "camStopPanning":
 			cam.stop_panning()
 		elif action == "camStopTilting":
