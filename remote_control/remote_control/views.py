@@ -74,19 +74,15 @@ def run(request):
 		elif action == "camStartTurningLeft":
 			while action != "camStopTurningLeft":
 				cam.turn_left(1)
-			break
 		elif action == "camStartTurningRight":
 			while action != "camStopTurningRight":
 				cam.turn_right(1)
-			break
 		elif action == "camStartTurningUp":
 			while action != "camStopTurningUp":
 				cam.turn_up(1)
-			break
 		elif action == "camStartTurningDown":
 			while action != "camStopTurningDown":
 				cam.turn_down(1)
-			break
 	if 'speed' in request.GET:
 		speed = int(request.GET['speed'])
 		if speed < 0:
