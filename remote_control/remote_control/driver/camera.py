@@ -106,26 +106,26 @@ class Camera(object):
 	def smooth_tilt(self, tilt_direction, delay=CAMERA_DELAY):
 		'''Control tilt servo to write the camera to ready position'''
 		if tilt_direction == "up":
-			tilt_diff = self.current_tilt - TILT_MAX
+			tilt_diff = self.current_tilt - self.TILT_MAX
 		else:
-			tilt_diff = self.current_tilt - TILT_MIN
+			tilt_diff = self.current_tilt - self.TILT_MIN
 		while keep_tilting: #check class attribute to continue or not
 			if tilt_diff != 0:
 				if tilt_direction == "up":
-					tilt_diff = self.current_tilt - TILT_MAX
+					tilt_diff = self.current_tilt - self.TILT_MAX
 					if tilt_diff < 0:
 						self.current_tilt = self.safe_plus(self.current_tilt, 1)
 					else:
-						self.current_tilt = TILT_MAX
+						self.current_tilt = self.TILT_MAX
 
 					self.tilt_servo.write(self.current_tilt)
 					time.sleep(delay)
 				else:
-					tilt_diff = self.current_tilt - TILT_MIN
+					tilt_diff = self.current_tilt - self.TILT_MIN
 					if tilt_diff > 0:
 						self.current_tilt = self.safe_plus(self.current_tilt, -1)
 					else:
-						self.current_tilt = TILT_MIN
+						self.current_tilt = self.TILT_MIN
 
 					self.tilt_servo.write(self.current_tilt)
 					time.sleep(delay)
@@ -135,26 +135,26 @@ class Camera(object):
 	def smooth_pan(self, pan_direction, delay=CAMERA_DELAY):
 		'''Control pan servo to write the camera to ready position'''
 		if pan_direction == "right":
-			pan_diff = self.current_pan - PAN_MAX
+			pan_diff = self.current_pan - self.PAN_MAX
 		else:
-			pan_diff = self.current_pan - PAN_MIN
+			pan_diff = self.current_pan - self.PAN_MIN
 		while keep_paning: #check class attribute to continue or not
 			if pan_diff != 0:
 				if pan_direction == "right":
-					pan_diff = self.current_pan - PAN_MAX
+					pan_diff = self.current_pan - self.PAN_MAX
 					if pan_diff < 0:
 						self.current_pan = self.safe_plus(self.current_pan, 1)
 					else:
-						self.current_pan = PAN_MAX
+						self.current_pan = self.PAN_MAX
 
 					self.pan_servo.write(self.current_pan)
 					time.sleep(delay)
 				else:
-					pan_diff = self.current_pan - PAN_MIN
+					pan_diff = self.current_pan - self.PAN_MIN
 					if pan_diff > 0:
 						self.current_pan = self.safe_plus(self.current_pan, -1)
 					else:
-						self.current_pan = PAN_MIN
+						self.current_pan = self.PAN_MIN
 
 					self.pan_servo.write(self.current_pan)
 					time.sleep(delay)
