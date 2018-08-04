@@ -111,7 +111,7 @@ class Camera(object):
 			tilt_diff = self.current_tilt - TILT_MIN
 		while keep_tilting: #check class attribute to continue or not
 			if tilt_diff != 0:
-				if tilt_direction == "up"
+				if tilt_direction == "up":
 					tilt_diff = self.current_tilt - TILT_MAX
 					if tilt_diff < 0:
 						self.current_tilt = self.safe_plus(self.current_tilt, 1)
@@ -140,7 +140,7 @@ class Camera(object):
 			pan_diff = self.current_pan - PAN_MIN
 		while keep_paning: #check class attribute to continue or not
 			if pan_diff != 0:
-				if pan_direction == "right"
+				if pan_direction == "right":
 					pan_diff = self.current_pan - PAN_MAX
 					if pan_diff < 0:
 						self.current_pan = self.safe_plus(self.current_pan, 1)
