@@ -134,16 +134,16 @@
             run_action('fwright')
             break;
           case '&':
-            run_action('camup')
+            run_action('camStartTurningUp')
             break;
           case '(':
-            run_action('camdown')
+            run_action('camStartTurningDown')
             break;
           case "'":
-            run_action('camright')
+            run_action('camStartTurningRight')
             break;
           case '%':
-            run_action('camleft')
+            run_action('camStartTurningLeft')
             break;
           case '1':
             set_speed('40')
@@ -190,19 +190,18 @@
           case 'D':
             run_action('fwstraight')
             break;
-          /* COMMENTED OUT TO KEEP CAMERA FROM RETURNING TO ZERO
           case '&':
-            run_action('camready')
+            run_action('camStopTurningUp')
             break;
           case '(':
-            run_action('camready')
+            run_action('camStopTurningDown')
             break;
           case "'":
-            run_action('camready')
+            run_action('camStopTurningRight')
             break;
           case '%':
-            run_action('camready')
-            break; */
+            run_action('camStopTurningLeft')
+            break;
         }
       }
       function forward_left(){
