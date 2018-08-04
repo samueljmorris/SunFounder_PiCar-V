@@ -105,7 +105,42 @@
         if (event.repeat != undefined) {
           allowed = !event.repeat;
         }
-        if (!allowed) return;
+        //var for arrow keys
+        var cameraKeys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
+        //If key is being held AND is a camera key, loop camera action
+        if (!allowed && event.key in cameraKeys)
+        {
+          //what on earth is going on here?
+          if (key == 0){
+          var x;
+          if(window.event) { // IE8 以及更早版本
+            x=event.keyCode;
+          }
+          else if(event.which) {// IE9/Firefox/Chrome/Opera/Safari
+            x=event.which;
+          }
+          var keychar=String.fromCharCode(x);
+        }
+        else{
+          keychar = key
+        }
+        switch(keychar){
+          case '&':
+            run_action('camup')
+            break;
+          case '(':
+            run_action('camdown')
+            break;
+          case "'":
+            run_action('camright')
+            break;
+          case '%':
+            run_action('camleft')
+            break;
+        }
+        }
+        //Else if key is being held down, return (break)
+        else if (!allowed) return;
         allowed = false;
         if (key == 0){
           var x;

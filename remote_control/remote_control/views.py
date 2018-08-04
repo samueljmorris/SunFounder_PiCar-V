@@ -72,13 +72,13 @@ def run(request):
 		elif action == 'camready':
 			cam.ready()
 		elif action == "camleft":
-			cam.turn_left(60)
+			cam.turn_left(1)
 		elif action == 'camright':
-			cam.turn_right(60)
+			cam.turn_right(1)
 		elif action == 'camup':
-			cam.turn_up(50)
+			cam.turn_up(1)
 		elif action == 'camdown':
-			cam.turn_down(30)	
+			cam.turn_down(1)	
 	if 'speed' in request.GET:
 		speed = int(request.GET['speed'])
 		if speed < 0:
