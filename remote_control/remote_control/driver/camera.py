@@ -113,7 +113,7 @@ class Camera(object):
 		else:
 			tilt_diff = self.current_tilt - self.TILT_MIN
 			print self._DEBUG_INFO, 'tilt_diff:', tilt_diff
-		while self.keep_tiltning: #check class attribute to continue or not
+		while self.keep_tilting: #check class attribute to continue or not
 			if tilt_diff != 0:
 				if tilt_direction == "up":
 					print self._DEBUG_INFO, 'Tilting up.'
