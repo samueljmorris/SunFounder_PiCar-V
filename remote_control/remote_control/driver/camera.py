@@ -105,60 +105,87 @@ class Camera(object):
 
 	def smooth_tilt(self, tilt_direction, delay=CAMERA_DELAY):
 		'''Control tilt servo to write the camera to ready position'''
-		if tilt_direction == "up":
+		print self._DEBUG_INFO, 'TILT_MAX:', self.TILT_MAX
+		print self._DEBUG_INFO, 'TILT_MIN:', self.TILT_MIN
+		if tilt_direction == "right":
 			tilt_diff = self.current_tilt - self.TILT_MAX
+			print self._DEBUG_INFO, 'tilt_diff:', tilt_diff
 		else:
 			tilt_diff = self.current_tilt - self.TILT_MIN
-		while self.keep_tilting: #check class attribute to continue or not
+			print self._DEBUG_INFO, 'tilt_diff:', tilt_diff
+		while self.keep_tiltning: #check class attribute to continue or not
 			if tilt_diff != 0:
 				if tilt_direction == "up":
+					print self._DEBUG_INFO, 'Tilting up.'
 					tilt_diff = self.current_tilt - self.TILT_MAX
+					print self._DEBUG_INFO, 'tilt_diff:', tilt_diff
 					if tilt_diff < 0:
 						self.current_tilt = self.safe_plus(self.current_tilt, 1)
+						print self._DEBUG_INFO, 'current_tilt:', self.current_tilt
 					else:
 						self.current_tilt = self.TILT_MAX
+						print self._DEBUG_INFO, 'current_tilt:', self.current_tilt
 
 					self.tilt_servo.write(self.current_tilt)
 					time.sleep(delay)
 				else:
+					print self._DEBUG_INFO, 'Tilting down.'
 					tilt_diff = self.current_tilt - self.TILT_MIN
+					print self._DEBUG_INFO, 'tilt_diff:', tilt_diff
 					if tilt_diff > 0:
 						self.current_tilt = self.safe_plus(self.current_tilt, -1)
+						print self._DEBUG_INFO, 'current_tilt:', self.current_tilt
 					else:
 						self.current_tilt = self.TILT_MIN
+						print self._DEBUG_INFO, 'current_tilt:', self.current_tilt
 
 					self.tilt_servo.write(self.current_tilt)
 					time.sleep(delay)
 			else:
+				print self._DEBUG_INFO, 'Smooth tilting completed.'
 				break
+
 
 	def smooth_pan(self, pan_direction, delay=CAMERA_DELAY):
 		'''Control pan servo to write the camera to ready position'''
+		print self._DEBUG_INFO, 'PAN_MAX:', self.PAN_MAX
+		print self._DEBUG_INFO, 'PAN_MIN:', self.PAN_MIN
 		if pan_direction == "right":
 			pan_diff = self.current_pan - self.PAN_MAX
+			print self._DEBUG_INFO, 'pan_diff:', pan_diff
 		else:
 			pan_diff = self.current_pan - self.PAN_MIN
+			print self._DEBUG_INFO, 'pan_diff:', pan_diff
 		while self.keep_panning: #check class attribute to continue or not
 			if pan_diff != 0:
 				if pan_direction == "right":
+					print self._DEBUG_INFO, 'Panning right.'
 					pan_diff = self.current_pan - self.PAN_MAX
+					print self._DEBUG_INFO, 'pan_diff:', pan_diff
 					if pan_diff < 0:
 						self.current_pan = self.safe_plus(self.current_pan, 1)
+						print self._DEBUG_INFO, 'current_pan:', self.current_pan
 					else:
 						self.current_pan = self.PAN_MAX
+						print self._DEBUG_INFO, 'current_pan:', self.current_pan
 
 					self.pan_servo.write(self.current_pan)
 					time.sleep(delay)
 				else:
+					print self._DEBUG_INFO, 'Panning left.'
 					pan_diff = self.current_pan - self.PAN_MIN
+					print self._DEBUG_INFO, 'pan_diff:', pan_diff
 					if pan_diff > 0:
 						self.current_pan = self.safe_plus(self.current_pan, -1)
+						print self._DEBUG_INFO, 'current_pan:', self.current_pan
 					else:
 						self.current_pan = self.PAN_MIN
+						print self._DEBUG_INFO, 'current_pan:', self.current_pan
 
 					self.pan_servo.write(self.current_pan)
 					time.sleep(delay)
 			else:
+				print self._DEBUG_INFO, 'Smooth panning completed.'
 				break
 
 	def ready(self):
