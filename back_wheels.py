@@ -12,22 +12,22 @@
 **********************************************************************
 '''
 
-from SunFounder_TB6612 import TB6612
-from SunFounder_PCA9685 import PCA9685
+import TB6612
+import PCA9685
 import filedb
 
 class Back_Wheels(object):
 	''' Back wheels control class '''
-	Motor_A = 17
-	Motor_B = 27
+	Motor_A = 17 #GPIO number for motor A on/off
+	Motor_B = 27 #GPIO number for motor B on/off
 
-	PWM_A = 4
-	PWM_B = 5
+	PWM_A = 4 #PWM channel for motor A speed
+	PWM_B = 5 #PWM channel for motor B speed
 
 	_DEBUG = False
 	_DEBUG_INFO = 'DEBUG "back_wheels.py":'
 
-	def __init__(self, debug=False, bus_number=1, db="config"):
+	def __init__(self, debug=False, bus_number=1, db="config"): #config file stores calibration parammeters
 		''' Init the direction channel and pwm channel '''
 		self.forward_A = True
 		self.forward_B = True

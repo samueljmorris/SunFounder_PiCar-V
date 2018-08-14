@@ -21,6 +21,13 @@ fi
 sudo apt-get update
 #sudo apt-get upgrade -y
 
+#############################################
+
+#The default Raspbian images do not have python_smbus or libjpeg8-dev installed.
+#The check is not necessary on the carsheens, go ahead with installation of dependencies.
+
+#############################################
+
 function if_continue(){
     while :; do
         echo  -e "(yes/no) \c"

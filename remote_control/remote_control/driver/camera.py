@@ -11,9 +11,9 @@
 **********************************************************************
 '''
 
-from picar.SunFounder_PCA9685 import Servo
+from picar.SunFounder_PCA9685 import Servo #Fix import
 import time
-from picar import filedb
+from picar import filedb #Fix import
 
 class Camera(object):
 	'''Camera movement control class'''

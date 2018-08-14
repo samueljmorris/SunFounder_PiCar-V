@@ -1,9 +1,9 @@
 import sys
 import front_wheels
 import back_wheels
-from SunFounder_PCA9685 import Servo
-import PCF8591
-from SunFounder_PCA9685 import PCA9685
+import Servo
+#import PCF8591 PCF ADC is not currently used.
+import PCA9685
 
 def servo_install():
     import time
@@ -73,8 +73,8 @@ def usage():
     print "  rear-wheel-test            Test the rear wheel"
     quit()
 
-class ADC(PCF8591.PCF8591):
-    pass
+#class ADC(PCF8591.PCF8591): PCF ADC is not currently used
+#    pass
 
 def setup():
     pwm=PCA9685.PWM(bus_number=1)
