@@ -96,7 +96,7 @@ class PWM(object):
                     elif line[11:-1] in self.RPI_REVISION_3_MODULE_BP:
                         return '3 Module B+'
                     else:
-                        print "Error. Pi revision didn't recognize, module number: %s" % line[11:-1]
+                        print "Error. Pi revision not recognized. Module number: %s" % line[11:-1]
                         print 'Exiting...'
                         quit()
         except Exception, e:
@@ -164,7 +164,7 @@ class PWM(object):
         if '/dev/i2c-%d' % bus_number in output.split(' '):
             print "I2C device setup OK"
         else:
-            print "Seems like I2C have not been set, Use 'sudo raspi-config' to set I2C"
+            print "Seems like the I2C interface has not been enabled. Use 'sudo raspi-config' to enable I2C"
         cmd = "i2cdetect -y %s" % self.bus_number
         output = commands.getoutput(cmd)
         print "Your PCA9685 address is set to 0x%02X" % self.address
@@ -178,14 +178,14 @@ class PWM(object):
             for address in tmp_addresses:
                 if address != '--':
                     addresses.append(address)
-        print "Conneceted i2c device:"
+        print "Connected i2c device:"
         if addresses == []:
             print "None"
         else:
             for address in addresses:
                 print "  0x%s" % address
         if "%02X" % self.address in addresses:
-            print "Wierd, I2C device is connected, Try to run the program again, If problem stills, email this information to support@sunfounder.com"
+            print "I2C device is connected. Try to run the program again. If problem persists, email this information to support@sunfounder.com"
         else:
             print "Device is missing."
             print "Check the address or wiring of PCA9685 Server driver, or email this information to support@sunfounder.com"
@@ -232,7 +232,7 @@ class PWM(object):
     def write_all_value(self, on, off):
         '''Set on and off value on all channel'''
         if self._DEBUG:
-            print self._DEBUG_INFO, 'Set all channel to value "%d"' % (off)
+            print self._DEBUG_INFO, 'Set all channels to value "%d"' % (off)
         self._write_byte_data(self._ALL_LED_ON_L, on & 0xFF)
         self._write_byte_data(self._ALL_LED_ON_H, on >> 8)
         self._write_byte_data(self._ALL_LED_OFF_L, off & 0xFF)
